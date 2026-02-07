@@ -15,6 +15,7 @@ class Dogcat < Formula
       #!/bin/bash
       exec "#{libexec}/.venv/bin/dcat" "$@"
     BASH
+    bin.install_symlink "dcat" => "dogcat"
   end
 
   def post_install
