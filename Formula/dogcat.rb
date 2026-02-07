@@ -16,7 +16,7 @@ class Dogcat < Formula
   end
 
   def post_install
-    system "uv", "sync", "--no-dev", "--no-editable", "--project", libexec.to_s
+    system "uv", "sync", "--no-dev", "--no-editable", "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", "--project", libexec.to_s
   end
 
   test do
