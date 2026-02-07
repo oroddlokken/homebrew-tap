@@ -5,7 +5,6 @@ class Dogcat < Formula
   sha256 "27b9c65e5b648837e7cbfc880d70d8b87a17908327157cf123301b5b11ea8f24"
   license "MIT"
 
-  depends_on "python@3.13"
   depends_on "uv"
 
   def install
@@ -20,8 +19,7 @@ class Dogcat < Formula
 
   def post_install
     # Install from pre-built wheel — no source build needed, no dylib relocation
-    python = Formula["python@3.13"].opt_bin/"python3.13"
-    system "uv", "venv", "--python", python, "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", libexec/".venv"
+    system "uv", "venv", "--python", "3.13", "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", libexec/".venv"
     wheel = Dir[libexec/"dist"/"dogcat-*.whl"].first
     system "uv", "pip", "install", "--python", libexec/".venv/bin/python",
            "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", wheel
