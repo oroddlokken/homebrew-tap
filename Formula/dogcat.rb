@@ -9,11 +9,14 @@ class Dogcat < Formula
 
   def install
     libexec.install Dir["*"]
-    system "uv", "sync", "--no-dev", "--no-editable", "--project", libexec.to_s
     (bin/"dcat").write <<~BASH
       #!/bin/bash
       exec "#{libexec}/.venv/bin/dcat" "$@"
     BASH
+  end
+
+  def post_install
+    system "uv", "sync", "--no-dev", "--no-editable", "--project", libexec.to_s
   end
 
   test do
