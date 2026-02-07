@@ -7,6 +7,8 @@ class Dogcatwindowbed < Formula
 
   depends_on "uv"
 
+  conflicts_with "dogcat", because: "both install `dcat` and `dogcat` binaries"
+
   def install
     libexec.install Dir["*"]
     (bin/"dcat").write <<~BASH
@@ -17,6 +19,7 @@ class Dogcatwindowbed < Formula
   end
 
   def post_install
+    ENV["UV_CACHE_DIR"] = HOMEBREW_CACHE/"uv"
     wheel = Dir[libexec/"dogcat-*.whl"].first
     system "uv", "venv", "--python", "3.13", libexec/".venv"
     system "uv", "pip", "install", "--python", libexec/".venv/bin/python", wheel
