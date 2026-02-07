@@ -8,6 +8,8 @@ class Dogcat < Formula
   depends_on "uv"
 
   def install
+    # Build wheel while source files (including README.md) are available
+    system "uv", "build", "--wheel", "--out-dir", "dist", "--cache-dir", buildpath/"uv-cache"
     libexec.install Dir["*"]
     (bin/"dcat").write <<~BASH
       #!/bin/bash
@@ -16,7 +18,11 @@ class Dogcat < Formula
   end
 
   def post_install
-    system "uv", "sync", "--no-dev", "--no-editable", "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", "--project", libexec.to_s
+    # Install from pre-built wheel — no source build needed, no dylib relocation
+    system "uv", "venv", "--python", "python3", libexec/".venv"
+    wheel = Dir[libexec/"dist"/"dogcat-*.whl"].first
+    system "uv", "pip", "install", "--python", libexec/".venv/bin/python",
+           "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", wheel
   end
 
   test do
