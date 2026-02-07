@@ -19,7 +19,7 @@ class Dogcat < Formula
 
   def post_install
     # Install from pre-built wheel — no source build needed, no dylib relocation
-    system "uv", "venv", "--python", "python3", libexec/".venv"
+    system "uv", "venv", "--python", "python3", "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", libexec/".venv"
     wheel = Dir[libexec/"dist"/"dogcat-*.whl"].first
     system "uv", "pip", "install", "--python", libexec/".venv/bin/python",
            "--cache-dir", HOMEBREW_TEMP/"dogcat-uv-cache", wheel
