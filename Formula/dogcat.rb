@@ -1,8 +1,8 @@
 class Dogcat < Formula
   desc "Git-backed issue tracking for AI agents"
   homepage "https://github.com/oroddlokken/dogcat"
-  url "https://github.com/oroddlokken/dogcat/releases/download/v0.5.2/dogcat-0.5.2-py3-none-any.whl"
-  sha256 "415524b39eec6a33d09dec7d0a3d1d0864617f6ec613c20d8419b47e2c7779ba"
+  url "https://github.com/oroddlokken/dogcat/releases/download/v0.5.3/dogcat-0.5.3-py3-none-any.whl"
+  sha256 "7f5f0a6f989560f0cd0d5621dd418811d05ab39bcd6b26b87e82c59d2f487a22"
   license "MIT"
 
   depends_on "uv"
