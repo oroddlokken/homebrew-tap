@@ -7,8 +7,6 @@ class Dogcat < Formula
 
   depends_on "uv"
 
-  conflicts_with "dogcat", because: "both install `dcat` and `dogcat` binaries"
-
   def install
     libexec.install Dir["*"]
     (bin/"dcat").write <<~BASH
