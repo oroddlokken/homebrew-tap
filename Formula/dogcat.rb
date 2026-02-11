@@ -16,6 +16,10 @@ class Dogcat < Formula
       #!/bin/bash
       exec "#{libexec}/bin/dcat" "$@"
     BASH
+    (bin/"dcat-merge-jsonl").write <<~BASH
+      #!/bin/bash
+      exec "#{libexec}/bin/dcat-merge-jsonl" "$@"
+    BASH
     bin.install_symlink "dcat" => "dogcat"
   end
 
