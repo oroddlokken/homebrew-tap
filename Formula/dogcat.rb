@@ -3,8 +3,8 @@ class Dogcat < Formula
 
   desc "lightweight, file-based issue tracking and memory upgrade for AI agents (and humans!)"
   homepage "https://github.com/oroddlokken/dogcat"
-  url "https://github.com/oroddlokken/dogcat/releases/download/v0.7.2/dogcat-0.7.2-py3-none-any.whl"
-  sha256 "79e206cf3ba3bea710a928da8dd42c2b1c98a68f98ddaea0deb1ad81e36ed1c8"
+  url "https://github.com/oroddlokken/dogcat/releases/download/v0.7.3/dogcat-0.7.3-py3-none-any.whl"
+  sha256 "6b82777bec143c59ab6544b15346c2118be3b9577d316d48c5c61ae9906bb938"
   license "MIT"
 
   depends_on "python@3.14"
