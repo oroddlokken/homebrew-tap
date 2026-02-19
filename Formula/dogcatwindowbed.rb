@@ -22,7 +22,8 @@ class Dogcatwindowbed < Formula
   def post_install
     python = Formula["python@3.14"].opt_bin/"python3.14"
     wheel = libexec/"dogcat-#{version}-py3-none-any.whl"
-    system python, "-m", "pip", "--python", libexec/"bin/python", "install", wheel
+    system python, "-m", "pip", "--python", libexec/"bin/python", "install", "#{wheel}[web]"
+    generate_completions_from_executable(bin/"dcat", "--show-completion")
   end
 
   test do
