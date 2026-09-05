@@ -11,22 +11,28 @@ class Ccreport < Formula
   depends_on "python@3.13"
 
   def install
-    virtualenv_create(libexec, "python3.13")
+    venv = virtualenv_create(libexec, "python3.13")
     wheel = "ccreport-#{version}-py3-none-any.whl"
     libexec.install cached_download => wheel
-    # Not venv.pip_install: that passes --no-deps and leaves a venv holding
-    # ccreport and none of what it imports. pip resolves the wheel's
-    # dependencies from PyPI, binary wheels included, so nothing needs a Rust
-    # toolchain here.
-    python = formula_opt_bin("python@3.13")/"python3.13"
-    system python, "-m", "pip", "--python=#{libexec}/bin/python", "install",
-           "--no-cache-dir", libexec/wheel
+    venv.pip_install libexec/wheel
     %w[ccreport ccu].each do |cmd|
       (bin/cmd).write <<~BASH
         #!/bin/bash
         exec "#{libexec}/bin/#{cmd}" "$@"
       BASH
     end
+  end
+
+  # The dependencies land here rather than in install, after Homebrew has
+  # relocated the keg. venv.pip_install passes --no-deps, and installing them
+  # during install fails the relocation: orjson's extension module has no
+  # header room for the longer dylib ID, and Homebrew stops the install on
+  # that. Nothing here links against a Homebrew library, so relocation has
+  # nothing to do for them.
+  def post_install
+    python = formula_opt_bin("python@3.13")/"python3.13"
+    system python, "-m", "pip", "--python=#{libexec}/bin/python", "install",
+           "--no-cache-dir", libexec/"ccreport-#{version}-py3-none-any.whl"
   end
 
   test do
