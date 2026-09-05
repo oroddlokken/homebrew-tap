@@ -29,10 +29,12 @@ class Ccreport < Formula
   # header room for the longer dylib ID, and Homebrew stops the install on
   # that. Nothing here links against a Homebrew library, so relocation has
   # nothing to do for them.
-  def post_install
-    python = formula_opt_bin("python@3.13")/"python3.13"
-    system python, "-m", "pip", "--python=#{libexec}/bin/python", "install",
-           "--no-cache-dir", libexec/"ccreport-#{version}-py3-none-any.whl"
+  post_install_steps do
+    run "{{HOMEBREW_PREFIX}}/opt/python@3.13/bin/python3.13",
+        args:           ["-m", "pip", "--python={{HOMEBREW_PREFIX}}/opt/ccreport/libexec/bin/python",
+                         "install", "--no-cache-dir",
+                         "{{HOMEBREW_PREFIX}}/opt/ccreport/libexec/ccreport-{{version}}-py3-none-any.whl"],
+        network_access: true
   end
 
   test do
