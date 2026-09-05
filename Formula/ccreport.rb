@@ -11,10 +11,16 @@ class Ccreport < Formula
   depends_on "python@3.13"
 
   def install
-    venv = virtualenv_create(libexec, "python3.13")
+    virtualenv_create(libexec, "python3.13")
     wheel = "ccreport-#{version}-py3-none-any.whl"
     libexec.install cached_download => wheel
-    venv.pip_install libexec/wheel
+    # Not venv.pip_install: that passes --no-deps and leaves a venv holding
+    # ccreport and none of what it imports. pip resolves the wheel's
+    # dependencies from PyPI, binary wheels included, so nothing needs a Rust
+    # toolchain here.
+    python = formula_opt_bin("python@3.13")/"python3.13"
+    system python, "-m", "pip", "--python=#{libexec}/bin/python", "install",
+           "--no-cache-dir", libexec/wheel
     %w[ccreport ccu].each do |cmd|
       (bin/cmd).write <<~BASH
         #!/bin/bash
