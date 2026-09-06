@@ -5,8 +5,8 @@ class Ccreport < Formula
   homepage "https://github.com/oroddlokken/ccreport"
   # Both fields are rewritten by ccreport's update-homebrew job on every
   # release; the sha256 below is a placeholder until the first one lands.
-  url "https://github.com/oroddlokken/ccreport/releases/download/v0.1.2/ccreport-0.1.2-py3-none-any.whl"
-  sha256 "9586b4af6bf692feee7c77477b846cf92b929ec4da7a7d4a3b6497f2ae6947e1"
+  url "https://github.com/oroddlokken/ccreport/releases/download/v0.1.3/ccreport-0.1.3-py3-none-any.whl"
+  sha256 "d901da78abf0d24af7d7073e9a1f9f6253ed3b30cd8ba786db37fa201662a630"
 
   depends_on "python@3.13"
 
