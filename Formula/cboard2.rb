@@ -3,8 +3,8 @@ class Cboard2 < Formula
 
   desc "Terminal dashboard over every git repo on your disk"
   homepage "https://github.com/oroddlokken/cboard2"
-  url "https://github.com/oroddlokken/cboard2/releases/download/v0.2.0/cboard2-0.2.0-py3-none-any.whl"
-  sha256 "cd19011a563bb1e648ad15e3d38e70b660ca4ba91c161295ace4b2ad33185441"
+  url "https://github.com/oroddlokken/cboard2/releases/download/v0.2.1/cboard2-0.2.1-py3-none-any.whl"
+  sha256 "034be7f88e174760a31fb187bad9d1e82607821c8d55d2acce0cee1351fe4014"
   license "MIT"
 
   depends_on "python@3.13"
