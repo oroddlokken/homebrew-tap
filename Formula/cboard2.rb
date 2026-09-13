@@ -7,10 +7,10 @@ class Cboard2 < Formula
   sha256 "701b2a266b895339a33d9fad80f58135beade42e0ec18f8bae4e5824d985181d"
   license "MIT"
 
-  depends_on "python@3.13"
+  depends_on "python@3.14"
 
   def install
-    venv = virtualenv_create(libexec, "python3.13")
+    venv = virtualenv_create(libexec, "python3.14")
     wheel = "cboard2-#{version}-py3-none-any.whl"
     libexec.install cached_download => wheel
     venv.pip_install libexec/wheel
@@ -27,7 +27,7 @@ class Cboard2 < Formula
   # for them; running after it also holds if one later ships an extension
   # module whose Mach-O header has no room for the longer dylib ID.
   post_install_steps do
-    run "{{HOMEBREW_PREFIX}}/opt/python@3.13/bin/python3.13",
+    run "{{HOMEBREW_PREFIX}}/opt/python@3.14/bin/python3.14",
         args:           ["-m", "pip", "--python={{HOMEBREW_PREFIX}}/opt/cboard2/libexec/bin/python",
                          "install", "--no-cache-dir",
                          "{{HOMEBREW_PREFIX}}/opt/cboard2/libexec/cboard2-{{version}}-py3-none-any.whl"],

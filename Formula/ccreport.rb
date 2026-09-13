@@ -8,10 +8,10 @@ class Ccreport < Formula
   url "https://github.com/oroddlokken/ccreport/releases/download/v0.1.3/ccreport-0.1.3-py3-none-any.whl"
   sha256 "d901da78abf0d24af7d7073e9a1f9f6253ed3b30cd8ba786db37fa201662a630"
 
-  depends_on "python@3.13"
+  depends_on "python@3.14"
 
   def install
-    venv = virtualenv_create(libexec, "python3.13")
+    venv = virtualenv_create(libexec, "python3.14")
     wheel = "ccreport-#{version}-py3-none-any.whl"
     libexec.install cached_download => wheel
     venv.pip_install libexec/wheel
@@ -30,7 +30,7 @@ class Ccreport < Formula
   # that. Nothing here links against a Homebrew library, so relocation has
   # nothing to do for them.
   post_install_steps do
-    run "{{HOMEBREW_PREFIX}}/opt/python@3.13/bin/python3.13",
+    run "{{HOMEBREW_PREFIX}}/opt/python@3.14/bin/python3.14",
         args:           ["-m", "pip", "--python={{HOMEBREW_PREFIX}}/opt/ccreport/libexec/bin/python",
                          "install", "--no-cache-dir",
                          "{{HOMEBREW_PREFIX}}/opt/ccreport/libexec/ccreport-{{version}}-py3-none-any.whl"],
